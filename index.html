@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigatoverse</title>
+    <!-- Include Website Icon -->
+    <link rel="icon" href="icon.png" type="image/png">
+    <!-- Include Google Font for Raleway -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Resetting default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Raleway', sans-serif; /* Apply Raleway font throughout */
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #222; /* Darker text color for general content */
+            line-height: 1.6;
+            overflow-x: hidden;
+            animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+        }
+
+        /* Fade-in animation keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .navbar {
+            width: 100%;
+            padding: 11px 20px; /* Further reduced padding to make the top bar 5% smaller in height */
+            background: linear-gradient(180deg, rgba(127, 3, 252, 0.8) 0%, rgba(127, 3, 252, 0.5) 100%); /* Lighter, glossy effect */
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            transition: top 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow to top bar */
+        }
+
+        .navbar .brand img {
+            max-height: 80px; /* Increased height without affecting the top bar size */
+            height: auto;
+            width: auto;
+        }
+
+        .navbar .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar .menu a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .header {
+            width: 100%;
+            padding: 130px 20px 20px; /* Adjusted padding to move text down */
+            background-color: #f4f4f4;
+            text-align: center;
+            position: relative; /* For background logo positioning */
+            animation: fadeIn 1.5s ease-in-out; /* Additional animation for header */
+        }
+
+        .header h1 {
+            font-size: 2.5rem; /* Smaller font size */
+            color: #6602d1; /* Darker purple text */
+            margin-bottom: 20px;
+            position: relative; /* To position text above background logo */
+            z-index: 2;
+        }
+
+        /* Adding custom styles for different colors in the word "Navigatoverse" */
+        .header h1 span {
+            color: #ff7300; /* Darker orange color */
+        }
+
+        .header p {
+            font-size: 1.3rem; /* Slightly smaller paragraph font size */
+            color: #444; /* Darker grey text */
+            margin-bottom: 30px;
+        }
+
+        /* Background logo behind the header text */
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            background-image: url('background.png');
+            background-size: 1080px 1080px; /* Set to 1080x1080 dimension */
+            background-repeat: no-repeat;
+            opacity: 1; /* Adjusted opacity for less transparency */
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Positioned behind the text */
+        }
+
+        .social-buttons-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 3; /* Ensure it is above the header background */
+        }
+
+        .social-buttons {
+            background-color: #ffffff; /* Solid white background */
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .social-buttons:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-buttons a {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .social-buttons img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .social-buttons img:hover {
+            transform: rotate(360deg) scale(1.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-content {
+            width: 100%;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .offering {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            width: 30%;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 1.8s ease-in-out; /* Animation for offerings */
+        }
+
+        .offering:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .offering img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .offering h2 {
+            font-size: 1.5rem; /* Smaller title size */
+            color: #6602d1; /* Darker purple text */
+            margin-bottom: 15px;
+        }
+
+        .offer-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #e67f00; /* Darker orange background */
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .offer-button:hover {
+            background-color: #b96500; /* Darker hover state */
+        }
+
+        .footer {
+            width: 100%;
+            padding: 30px 20px;
+            background-color: #222; /* Darker footer background */
+            color: #ffffff;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out; /* Animation for footer */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .navbar .menu a {
+                font-size: 0.9rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1.2rem;
+            }
+
+            .offering {
+                width: 45%; /* Adjust width for tablet screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar .brand img {
+                max-height: 60px; /* Adjust size for smaller screens */
+            }
+
+            .navbar .menu a {
+                font-size: 0.8rem;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 1.1rem;
+            }
+
+            .offering {
+                width: 100%; /* Full width for mobile screens */
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar .brand img {
+                max-height: 50px; /* Adjust size for smaller screens */
+            }
+
+            .navbar .menu {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar .menu a {
+                font-size: 0.8rem;
+                margin-top: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .social-buttons img {
+                width: 40px; /* Smaller icons for mobile */
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="welcome.png" alt="Navigatoverse Logo">
+        </div>
+        <div class="menu">
+            <a href="#">Home</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <header class="header">
+        <h1>Welcome to <span>Navigato</span>verse</h1> <!-- Span used to change color of "Navigato" -->
+        <p>Your Journey to Digital Success Starts Here</p>
+
+        <!-- Social Media Buttons Wrapper -->
+        <div class="social-buttons-wrapper">
+            <div class="social-buttons">
+                <a href="https://www.fiverr.com/pe/pdkWRlN" target="_blank">
+                    <img src="fiverr.png" alt="Fiverr">
+                </a>
+                <a href="https://www.linkedin.com/company/navigatoverse/" target="_blank">
+                    <img src="linkedin.png" alt="LinkedIn">
+                </a>
+                <a href="https://www.facebook.com/Navigatoverse" target="_blank">
+                    <img src="facebook.png" alt="Facebook">
+                </a>
+                <a href="https://www.instagram.com/navigatoverse?igsh=dm54ZGY2dDMyMnNo&utm_source=qr" target="_blank">
+                    <img src="instagram.png" alt="Instagram">
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <div class="offering">
+            <img src="1.png" alt="Wordpress Website Design">
+            <h2>Wordpress Website Design</h2>
+            <a href="https://www.fiverr.com/s/e6EBKxP" target="_blank" class="offer-button">View on Fiverr</a>
+        </div>
+        <div class="offering">
+            <img src="2.png" alt="Graphics Design">
+            <h2>Graphics Design</h2>
+            <a href="https://www.fiverr.com/s/xXyG2LZ" target="_blank" class="offer-button">View on Fiverr</a>
+        </div>
+        <div class="offering">
+            <img src="3.png" alt="Penetration Testing">
+            <h2>Penetration Testing</h2>
+            <a href="https://www.fiverr.com/s/2K7XqxV" target="_blank" class="offer-button">View on Fiverr</a>
+        </div>
+        <!-- New Offers Section -->
+        <div class="offering">
+            <img src="4.png" alt="SEO Optimization">
+            <h2>SEO Optimization</h2>
+            <a href="https://www.fiverr.com/s/gDoRpDa" target="_blank" class="offer-button">View on Fiverr</a>
+        </div>
+        <div class="offering">
+            <h2>Coming Soon!</h2>
+            <p>New services will be available soon. Stay tuned for more updates!</p>
+        </div>
+        <div class="offering">
+            <h2>Coming Soon!</h2>
+            <p>New services will be available soon. Stay tuned for more updates!</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        &copy; 2024 Navigatoverse. All rights reserved.
+    </footer>
+
+    <script>
+        // JavaScript for sticky navbar that hides on scroll down and shows on scroll up
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('.navbar');
+
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down
+                navbar.style.top = '-80px'; // Adjust based on navbar height
+            } else {
+                // Scrolling up
+                navbar.style.top = '0';
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>
