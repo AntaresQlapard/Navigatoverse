@@ -108,7 +108,7 @@
             content: '';
             position: absolute;
             top: 50%;
-            left: 50%;
+            left: 68%;
             transform: translate(-50%, -50%);
             background-image: url('background.png');
             background-size: 1080px 1080px; /* Set to 1080x1080 dimension */
@@ -393,6 +393,12 @@
                 // Scrolling up
                 navbar.style.top = '0';
             }
+
+            // Ensure navbar is visible at the top of the page
+            if (scrollTop === 0) {
+                navbar.style.top = '0';
+            }
+
             lastScrollTop = scrollTop;
         });
 
